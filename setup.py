@@ -3,11 +3,11 @@ import os
 import re
 import sys
 
-v = open(os.path.join(os.path.dirname(__file__), 'mako', '__init__.py'))
-VERSION = re.compile(r".*__version__ = '(.*?)'", re.S).match(v.read()).group(1)
-v.close()
+with open(os.path.join(os.path.dirname(__file__), 'mako', '__init__.py')) as v: 
+    VERSION = re.compile(r".*__version__ = '(.*?)'", re.S).match(v.read()).group(1)
 
-readme = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as r:
+    readme = r.read()
 
 if sys.version_info < (2, 6):
     raise Exception("Mako requires Python 2.6 or higher.")
@@ -51,7 +51,10 @@ setup(name='Mako',
       test_suite="nose.collector",
       zip_safe=False,
       install_requires=install_requires,
-      extras_require={},
+      extras_require={
+        'optional': ['Beaker>=1.1', 'babel', 'lingua'],
+        'test' : ['nose >= 0.11', 'mock'],
+        },
       entry_points="""
       [python.templating.engines]
       mako = mako.ext.turbogears:TGPlugin
