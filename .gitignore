@@ -12,3 +12,5 @@
 /include
 /lib
 /man
+
+.tox/
