@@ -8,9 +8,7 @@ import re
 from mako.cache import CacheImpl, register_plugin
 
 try:
-    # unitttest has a SkipTest also but pytest doesn't
-    # honor it unless nose is imported too...
-    from nose import SkipTest
+    from unittest import SkipTest
 except ImportError:
     from _pytest.runner import Skipped as SkipTest
 
